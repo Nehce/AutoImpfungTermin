@@ -1,10 +1,8 @@
 # coding:"utf-8"
 
 import argparse
-import requests
 from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException
-import datetime
 import time
 
 
@@ -12,7 +10,7 @@ parser = argparse.ArgumentParser(description='input plz.')
 parser.add_argument('--p', required=True, help='input plz.')
 args = parser.parse_args()
 
-# infomation
+# information
 email = "example@outlook.com"
 telephone = "177777777"
 src = "https://003-iz.impfterminservice.de/impftermine/service?plz="+str(args.p)
