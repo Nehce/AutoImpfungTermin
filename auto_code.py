@@ -44,13 +44,20 @@ web.get(src)
 time.sleep(5)
 
 # cookie 确认
-button_cookie = "/html/body/app-root/div/div/div/div[2]/div[2]/div/div[1]/a"
+button_cookie = "/html/body/app-root/div/div/div/div[3]/div[2]/div/div[1]/a"
+button_cookie2 = "/html/body/app-root/div/div/div/div[3]/div[2]/div/div[2]/a"
+
 try:
     web.find_element_by_xpath(button_cookie).click()
 except NoSuchElementException:
-    pass
+    print("cookie1 button not found")
 
 time.sleep(1)
+
+# try:
+#    web.find_element_by_xpath(button_cookie2).click()
+# except NoSuchElementException:
+#    print("cookie2 button not found")
 
 count = 1
 print("\a")
@@ -60,14 +67,15 @@ while True:
         web.find_element_by_xpath(button_no).click()
     except NoSuchElementException:
         print("waiting room......")
+        time.sleep(10)
+        # 如果从waiting room进入预约界面，可能出现cookie
         try:
             web.find_element_by_xpath(button_cookie).click()
         except NoSuchElementException:
             pass
-        time.sleep(10)
         continue
     else:  # 网页加载正常，尝试进行预约
-        print(str(args.p)+": 正在进行第"+str(count)+"次尝试")
+        print(str(args.p) + ": 正在进行第" + str(count) + "次尝试")
         count += 1
         time.sleep(4)
         if count > 1 and (count - 1) % 100 == 0:
