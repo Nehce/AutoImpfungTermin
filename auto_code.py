@@ -1,10 +1,8 @@
 # coding:"utf-8"
 
 import argparse
-import requests
 from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException
-import datetime
 import time
 
 
@@ -12,7 +10,7 @@ parser = argparse.ArgumentParser(description='input plz.')
 parser.add_argument('--p', required=True, help='input plz.')
 args = parser.parse_args()
 
-# infomation
+# information
 email = "example@outlook.com"
 telephone = "177777777"
 src = "https://003-iz.impfterminservice.de/impftermine/service?plz="+str(args.p)
@@ -113,8 +111,12 @@ while True:
                     continue
                 else:
                     print("已成功获取code，请尽快查看手机，填写验证码！")
-                    for i in range(100):
-                        print("\a")
-                        time.sleep(0.8)
+                    print("\a")
+                    time.sleep(0.8)
+                    print("\a")
+                    time.sleep(0.8)
+                    print("\a")
+                    sms_code = input("请输入SMS验证码：")
+                    web.find_element_by_xpath(box_sms).send_keys(sms_code)
                     time.sleep(600)
                     break
