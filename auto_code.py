@@ -35,11 +35,12 @@ get_code = "/html/body/app-root/div/app-page-its-check-result/div/div/div[" \
            "2]/div/div/div/div/app-its-check-success/div/form/div[3]/button "
 box_sms = "/html/body/app-root/div/app-page-its-check-result/div/div/div[" \
           "2]/div/div/div/div/app-its-check-success/div/form/div[1]/label/input "
+box_birth = '/html/body/app-root/div/app-page-its-login/div/div/div[2]/app-its-login-user/div/div/app-corona-vaccination/div[3]/div/div/div/div[2]/div/app-corona-vaccination-no/form/div[3]/div/div/input'
 
 web = webdriver.Chrome(driver_path)
 web.get(src)
 
-time.sleep(5)
+time.sleep(3)
 
 # cookie 确认
 button_cookie = "/html/body/app-root/div/div/div/div[3]/div[2]/div/div[1]/a"
@@ -52,11 +53,11 @@ except NoSuchElementException:
 
 time.sleep(1)
 
-# try:
+#try:
 #    web.find_element_by_xpath(button_cookie2).click()
-# except NoSuchElementException:
+#except NoSuchElementException:
 #    print("cookie2 button not found")
-
+    
 count = 1
 print("\a")
 
@@ -73,7 +74,7 @@ while True:
             pass
         continue
     else:  # 网页加载正常，尝试进行预约
-        print(str(args.p) + ": 正在进行第" + str(count) + "次尝试")
+        print(str(args.p)+": 正在进行第"+str(count)+"次尝试")
         count += 1
         time.sleep(4)
         if count > 1 and (count - 1) % 100 == 0:
@@ -89,7 +90,7 @@ while True:
             print("  有可用code")
             web.find_element_by_xpath(button_yes).click()
             time.sleep(1)
-            web.find_element_by_name("age").send_keys(age)
+            web.find_element_by_xpath(box_birth).send_keys("20001111")
             time.sleep(0.5)
             web.find_element_by_xpath(button_confirm).click()
             time.sleep(1)
@@ -111,12 +112,8 @@ while True:
                     continue
                 else:
                     print("已成功获取code，请尽快查看手机，填写验证码！")
-                    print("\a")
-                    time.sleep(0.8)
-                    print("\a")
-                    time.sleep(0.8)
-                    print("\a")
-                    sms_code = input("请输入SMS验证码：")
-                    web.find_element_by_xpath(box_sms).send_keys(sms_code)
+                    for i in range(100):
+                        print("\a")
+                        time.sleep(0.8)
                     time.sleep(600)
                     break
