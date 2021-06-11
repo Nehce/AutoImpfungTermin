@@ -61,8 +61,9 @@ while True:
     try:
         web.find_element_by_xpath(button_find_termin).click()
     except NoSuchElementException:
-        web.get(src)
-        time.sleep(3)
+        print("waiting room...")
+        time.sleep(5)
+        continue
     time.sleep(0.5)
     try:
         web.find_element_by_id("itsSearchAppointmentsModal").click()
@@ -81,8 +82,14 @@ while True:
         else:
             print("Kein Termin..." + str(count))
             print("Refreshing......")
+            web.quit()
+            time.sleep(1)
+            web = webdriver.Chrome(driver_path)
             web.get(src)
-            time.sleep(1.5)
+            time.sleep(1)
+            web.get(src)
+            time.sleep(1)
+            continue
 
     else:
         break
